@@ -1,10 +1,30 @@
-
+"use client"
 import Card from '@/components/cards'
 import Titulo from '@/components/title'
-import Painel  from '@/components/painel'
+import Painel from '@/components/painel'
 import "./animation.css"
+import { useState } from 'react'
 
 export default function Home() {
+
+
+  const [Viagens,setViagens] = useState([]) 
+
+
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxZTkyMjY2NzQ4MWFiMjA3ZDY0MjQ1MGIwZWZiNDYxZSIsInN1YiI6IjVlYTA5ZTZiYmU0YjM2MDAxYzU5NWExNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.Vhu0pPCiIwmtrpyOHdBlQid8HJJllaHthn1MERS_ANg'
+    }
+  };
+  
+  fetch('https://api.themoviedb.org/3/trending/movie/week?language=pt-BR', options)
+    .then(response => response.json())
+    .then(response => setViagens(response.results))
+    .catch(err => console.error(err));
+
+
   return (
     <main className="flex min-h-screen flex-col">
       <nav className="flex gap-4 justify-between bg-slate-900 w-full p-3">
@@ -17,17 +37,18 @@ export default function Home() {
         <a href="/sobre">Sobre</a>
       </nav>
 
-      <Titulo> viagem braba</Titulo> 
+      <Titulo> viagem braba</Titulo>
       <section className='flex flex-wrap gap-4 p-4'>
-      <Card titulo='Top 3'/>
-      <Card titulo='Dinheiro Facil'/>
-      <Card titulo='help me i help you'/>
-      <Card titulo='dçlgkdfçlk' />
+        {Viagens && Viagens.map(viagem => <Card viagem={viagem} /> ) }  
+        <Card titulo='Top 3' />
+        <Card titulo='Dinheiro Facil' />
+        <Card titulo='help me i help you' />
+        <Card titulo='dçlgkdfçlk' />
       </section>
-      
-      <Titulo> viagem mas</Titulo> 
-      <Titulo> viagem d</Titulo> 
-      <Titulo> viagem braba</Titulo> 
+
+      <Titulo> viagem mas</Titulo>
+      <Titulo> viagem d</Titulo>
+      <Titulo> viagem braba</Titulo>
 
     </main>
   )

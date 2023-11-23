@@ -3,7 +3,9 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite'; 
 import { useState } from 'react';
 
-export default function Card({titulo, nota}){
+export default function Card({viagem}){
+
+    const poster = "https://image.tmdb.org/t/p/w500/" + viagem.poster_path 
     const [favorito, setFavorito] = useState(false)
 
 
@@ -22,10 +24,11 @@ export default function Card({titulo, nota}){
 
             }
             <img className="rounded" src="https://www.cvc.com.br/dicas-de-viagem/wp-content/uploads/2021/09/como-chegar-em-porto-de-galinhas-1024x546.png" alt="" />
-                <span className="text-lg font-bold line-clamp-1">{titulo}</span>
+                <span className="text-lg font-bold line-clamp-1">{viagem.title}</span>
+                
                 <div>
                     <i></i>
-                    <span>{titulo}</span>
+                    <span>{viagem.vote.average.toFixed(1)}</span>
                 </div>
                 <a href="" className="bg-amber-400 text-black w-full rounded py-1">detalhes</a>
                 
