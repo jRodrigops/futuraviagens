@@ -1,8 +1,8 @@
 "use client"
 import Card from '@/components/cards'
 import Titulo from '@/components/title'
-import Painel from '@/components/painel'
-import "./animation.css"
+
+
 import { useState } from 'react'
 
 export default function Home() {
